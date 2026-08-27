@@ -1,0 +1,81 @@
+local_backend: true
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/img"
+public_folder: "/img"
+
+collections:
+  - name: "post"
+    label: "Posts"
+    label_singular: "Post"
+    folder: "content/post"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "yaml-frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Last Modified Date", name: "lastmod", widget: "datetime", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Photos Gallery", name: "photos", widget: "list", field: { label: "Photo URL", name: "photo", widget: "image" }, required: false }
+      - { label: "Enable Math (KaTeX)", name: "math", widget: "boolean", default: false, required: false }
+      - { label: "Enable Mermaid", name: "mermaid", widget: "boolean", default: false, required: false }
+      - { label: "Enable TOC", name: "toc", widget: "boolean", default: true, required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/about.md"
+        label: "About Page"
+        name: "about"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string", required: false }
+          - { label: "Publish Date", name: "date", widget: "datetime", required: false }
+          - { label: "Last Modified Date", name: "lastmod", widget: "datetime", required: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+      - file: "content/friend.md"
+        label: "Friend Link Page"
+        name: "friend"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string", required: false }
+          - { label: "Publish Date", name: "date", widget: "datetime", required: false }
+          - { label: "Last Modified Date", name: "lastmod", widget: "datetime", required: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - file: "hugo.toml"
+        label: "Hugo Site Config"
+        name: "hugo"
+        format: "toml"
+        fields:
+          - { label: "Base URL", name: "baseURL", widget: "string" }
+          - { label: "Language Code", name: "languageCode", widget: "string" }
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Theme", name: "theme", widget: "string" }
+          - { label: "Default Content Language", name: "defaultContentLanguage", widget: "string" }
+      - file: "config/_default/params.yml"
+        label: "Theme Parameters"
+        name: "params"
+        format: "yaml"
+        fields:
+          - { label: "Author", name: "author", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Banner Image", name: "banner", widget: "image", required: false }
+          - { label: "Avatar Image", name: "avatar", widget: "image", required: false }
+          - { label: "Read More Link Text", name: "excerpt_link", widget: "string", required: false }
+          - { label: "Copyright Notice", name: "copyright", widget: "string", required: false }
+
